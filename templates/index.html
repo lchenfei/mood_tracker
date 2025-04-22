@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mood Tracker Web</title>
+</head>
+<body>
+    <h1>🌤️ Mood Tracker</h1>
+    <form method="POST">
+        <label for="mood">Mood:</label>
+        <select name="mood" required>
+            <option value="">-- Select --</option>
+            <option value="😊 Happy">😊 Happy</option>
+            <option value="😔 Sad">😔 Sad</option>
+            <option value="😠 Angry">😠 Angry</option>
+            <option value="😰 Anxious">😰 Anxious</option>
+            <option value="😐 Neutral">😐 Neutral</option>
+        </select>
+        <br><br>
+        <label for="note">Note:</label>
+        <textarea name="note" rows="3" cols="40" placeholder="Write a note..."></textarea>
+        <br><br>
+        <button type="submit">Save Mood</button>
+    </form>
+
+    {% if message %}
+        <p><strong>{{ message }}</strong></p>
+    {% endif %}
+
+    <br><hr><br>
+
+    <form action="/chart">
+        <button type="submit">View Mood Chart</button>
+    </form>
+
+    {% if mood_data %}
+    <h2>📊 Mood Summary</h2>
+    <ul>
+        {% for mood, count in mood_data.items() %}
+            <li>{{ mood }}: {{ count }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+</body>
+</html>
